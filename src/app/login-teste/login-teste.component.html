@@ -1,0 +1,42 @@
+<form [formGroup]="formLogin">
+    <div class="align-center">
+        <fieldset class="align-center">
+            <legend>Acesso ao sistema</legend>
+            <div>
+                <label> Login </label>
+                <input type="text" [formControlName]="'login'"> 
+            </div>
+            <br>
+            <div>
+                <label> Senha </label>
+                <input type="text" [formControlName]="'senha'"> 
+            </div>
+        </fieldset>
+    </div>
+</form>
+
+
+<form [formGroup]="formEndereco">
+    <div class="align-center">
+        <fieldset class="align-center">
+            <legend>Endereco</legend>
+            <div>
+                <label> Rua </label>
+                <input type="text" [formControlName]="'rua'"> 
+            </div>
+            <br>
+            <div>
+                <label> Numero </label>
+                <input type="text" [formControlName]="'numero'" > 
+            </div>
+            <br>
+            <div>
+                <label> Bairro </label>
+                <input type="text" [formControlName]="'bairro'"> 
+            </div>
+            <div>
+                
+            </div>
+        </fieldset>
+    </div>
+</form>
