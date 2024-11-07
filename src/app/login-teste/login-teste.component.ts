@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms'; // Corrigir para UntypedFormBuilder
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'login-teste',
   templateUrl: './login-teste.component.html',
   styleUrls: ['./login-teste.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule] // Remover FormBuilder daqui
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, ButtonModule] // Remover FormBuilder daqui
 })
 export class LoginTesteComponent {
   formLogin!: UntypedFormGroup; // Definir o tipo corretamente
@@ -16,6 +17,9 @@ export class LoginTesteComponent {
   enderecos: any [] = []
 
   constructor(private formBuilder: UntypedFormBuilder) {} // Usar UntypedFormBuilder
+
+  
+
 
   ngOnInit() {
     // Inicializar o formLogin com validações
@@ -27,7 +31,7 @@ export class LoginTesteComponent {
     this.formLogin = this.formBuilder.group({
       login: ['', Validators.required], // Campo de usuário com validação obrigatória
       senha: ['', Validators.required], // Campo de senha com validação obrigatória
-      endereco: []  // Campo de senha com validação obrigatória
+      endereco: [this.enderecos]  // Campo de senha com validação obrigatória
     });
   }
 
@@ -39,10 +43,17 @@ export class LoginTesteComponent {
     });
   }
 
+  @HostListener('window:keydown.enter', ['$event'])
   atribuirFormEndereco(){
-    console.log("Valor do form endereco", this.formLogin.value);
-    this.enderecos.push(this.formLogin.value)
-    this.formLogin.patchValue({endereco: this.enderecos})
+    let novoEndereco = this.formLogin?.value
+    if (this.enderecos.filter(x => x?.numero === novoEndereco?.numero)?.length > 0) {
+      this.enderecos.push(this.formEndereco?.value)
+      this.formLogin.patchValue({endereco: this.enderecos})
+      this.criarFormEndereco()
+
+    } else {
+      console.warn("Item já cadastrado");
+    }
   }
 
   login() {

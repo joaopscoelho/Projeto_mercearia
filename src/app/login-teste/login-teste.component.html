@@ -15,7 +15,6 @@
     </div>
 </form>
 
-
 <form [formGroup]="formEndereco">
     <div class="align-center">
         <fieldset class="align-center">
@@ -34,9 +33,11 @@
                 <label> Bairro </label>
                 <input type="text" [formControlName]="'bairro'"> 
             </div>
+            <br>
             <div>
-                
+                <button (click)="atribuirFormEndereco()">Adicionar </button>
             </div>
         </fieldset>
     </div>
 </form>
+
