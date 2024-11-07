@@ -46,14 +46,9 @@ export class LoginTesteComponent {
   @HostListener('window:keydown.enter', ['$event'])
   atribuirFormEndereco(){
     let novoEndereco = this.formLogin?.value
-    if (this.enderecos.filter(x => x?.numero === novoEndereco?.numero)?.length > 0) {
-      this.enderecos.push(this.formEndereco?.value)
-      this.formLogin.patchValue({endereco: this.enderecos})
-      this.criarFormEndereco()
-
-    } else {
-      console.warn("Item já cadastrado");
-    }
+    this.enderecos.push(this.formEndereco?.value)
+    this.formLogin.patchValue({endereco: this.enderecos})
+    this.criarFormEndereco()
   }
 
   login() {
